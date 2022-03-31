@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% load humanize %}
+
+{% load static %}
+
+{% block title %} About Us {% endblock title %}
+
+{% block keywords %} {{setting.keywords}} {% endblock keywords %}
+
+{% block description %} {{setting.description}} {% endblock description %}
+
+<!-- Header   -->
+{% block header %} {% include "pro-header.html" %} {% endblock header %}
+<!-- Header done  -->
+
+{% block content %}
+   <!-- About Page  -->
+   <div class="about-page">
+    <div class="container">
+        <h2 class="title">About Us</h2>
+        <div class="row">
+            <div class="col-2">
+                <div class="about-container">
+                   <h2> Floles Organics</h2>
+                   <p>{{setting.about|safe}}</p>
+                   <p>{{setting.about2|safe}}</p>                        
+                </div>
+            </div>
+            <div class="col-2">
+                <img src="{{setting.about_img.url}}">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- About Page Done  -->
+
+ 
+ {% endblock content %}
+
+ <!-- offer products  -->
+ {% block training %}  {% include "training.html" %} {% endblock training %}
+ <!-- offer products done -->
+
+ <!-- footer   -->
+ {% block footer %}  {% include "footer.html" %} {% endblock footer %}
+ <!-- footer done  -->

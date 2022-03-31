@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% load humanize %}
+
+{% block title %} {{profile.user.username}} Profile {% endblock title %}
+
+{% block keywords %} {{setting.keywords}} {% endblock keywords %}
+
+{% block description %} {{setting.description}} {% endblock description %}
+
+<!-- Header   -->
+{% block header %} {% include "pro-header.html" %} {% endblock header %}
+<!-- Header done  -->
+
+{% block content %}
+<!-- Profile Page  -->
+<div class="profile-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-2 prof">
+                <!-- <div class="join">
+                    <p></p>
+                </div> -->
+                <ul>
+                    <li><a href="{% url 'index' %}" class="btny">Home</a></li>   
+                    <li><a href="{% url 'userprofile' %}" class="btny">Profile</a></li>
+                    <li><a href="{% url 'userupdate' %}" class="btny">Profile Update</a></li>
+                    <li><a href="{% url 'userpassword' %}" class="btny">Password Update</a></li>
+                </ul>
+            </div>
+            <div class="col-2">
+                <div class="form-container">
+                    <div class="proform-btn">
+                        <span>Profile Details</span>
+                        <hr id="Indicate">
+                    </div>
+                    <form class="proform">
+                    {% csrf_token %}
+                        <p>First Name:  {{profile.first_name}}</p>
+                        <p>Last Name:  {{profile.last_name}}</p>
+                        <p>Email:   {{profile.user.email}}</p>
+                        <p>Phone:  {{profile.phone}}</p>
+                        <p>Address:  {{profile.address}}</p>
+                        <p>City:  {{profile.city}}</p>
+                        <p>State:  {{profile.state}}</p>
+                        <p>Country:  {{profile.country}}</p> 
+                    </form>
+                </div>
+            </div>
+            <div class="col-2">
+                <img src="{{profile.image.url}}">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Profile Page Done  -->
+
+
+
+{% endblock content %}
+
+<!-- samples  -->
+{% block samples %}{% include "samples.html" %} {% endblock samples %}
+<!-- samples ends here -->
+
+ <!-- footer   -->
+ {% block footer %}  {% include "footer.html" %} {% endblock footer %}
+ <!-- footer done  -->

@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% load humanize %}
+
+{% block title %} {{profile.user.username}} Profile Update {% endblock title %}
+
+{% block keywords %} {{setting.keywords}} {% endblock keywords %}
+
+{% block description %} {{setting.description}} {% endblock description %}
+
+<!-- Header   -->
+{% block header %} {% include "pro-header.html" %} {% endblock header %}
+<!-- Header done  -->
+
+{% block content %}
+<!-- Profile Page  -->
+<div class="profile-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-2 prof">
+                <ul>
+                    <li><a href="{% url 'index' %}" class="btny">Home</a></li>   
+                    <li><a href="{% url 'userprofile' %}" class="btny">Profile</a></li>
+                    <li><a href="{% url 'userupdate' %}" class="btny">Profile Update</a></li>
+                    <li><a href="{% url 'userpassword' %}" class="btny">Password Update</a></li>
+                </ul>
+            </div>
+            <div class="col-2">
+                <div class="form-container">
+                    <div class="proform-btn">
+                        <span>Profile Update</span>
+                        <hr id="Indicate">
+                    </div>
+                    <form class="proform" action="{% url 'userupdate' %}" method="POST" enctype="multipart/form-data"> 
+                    {% csrf_token %}   
+                        {{profileform.first_name}}
+                        {{profileform.last_name}}
+                        {{profileform.phone}}
+                        {{profileform.address}}  
+                        {{profileform.city}}
+                        {{profileform.state}}
+                        {{profileform.country}}
+                        {{profileform.image}}
+                        <input class="btn" type="submit" value="Save Changes">
+                    </form>
+                </div>
+            </div>
+            <div class="col-2">
+                <img src="{{profile.image.url}}">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Profile Page Done  -->
+
+
+
+{% endblock content %}
+
+<!-- samples  -->
+{% block samples %}{% include "samples.html" %} {% endblock samples %}
+<!-- samples ends here -->
+
+ <!-- footer   -->
+ {% block footer %}  {% include "footer.html" %} {% endblock footer %}
+ <!-- footer done  -->

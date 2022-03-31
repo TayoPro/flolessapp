@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% load humanize %}
+
+{% block title %} Account {% endblock title %}
+
+{% block keywords %} {{setting.keywords}} {% endblock keywords %}
+
+{% block description %} {{setting.description}} {% endblock description %}
+
+<!-- Header   -->
+{% block header %} {% include "acc-header.html" %} {% endblock header %}
+<!-- Header done  -->
+
+{% block content %}
+   
+ <!-- Account Page  -->
+ <div class="account-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-2">
+                <div class="accoun">
+                    <!-- <img src="{{setting.logo.url}}"> -->
+                    <h4>If you are a new client kindly click NewCart to activate your Shopcart.</h4>
+                    <h4>It is important for you to brand your Cart to enable us process your order swiftly.</h4>
+                    <h4>If you are a returning client kindly click Cart to process your order.</h4>
+                    <h4>Thank you.</h4>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="form-container" style="height: 500px;">
+                    <div class="form-btn">
+                        <span onclick="login()">Cart</span>
+                        <span onclick="register()">NewCart</span>
+                        <hr id="Indicator">
+                    </div>
+                    <form id="LoginForm" action="{% url 'loginform' %}" method="POST">
+                    {% csrf_token %}                          
+                        <input type="text" placeholder="Cart Name" name="username">                                
+                        <input type="password" placeholder="Password"  name="password">
+                        <button type="submit" class="btn">Login</button>
+                        <a href="">Forgot Password?</a>
+                    </form>
+                    <form id="RegForm" action="{% url 'registerform' %}" method="POST">
+                    {% csrf_token %}
+                        <input type="text" placeholder="Cart Name" name="username">
+                        <input type="text" placeholder="First Name" name="first_name">
+                        <input type="text" placeholder="Last Name" name="last_name">
+                        <input type="email" placeholder="Email" name="email">
+                        <input type="password" placeholder="Password" name="password1">
+                        <input type="password" placeholder="Repeat Password" name="password2">
+                        <input type="hidden" value="profile/avatar2.jpg" name="pro_img">
+                        <button type="submit" class="btn">Register</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Account Page Done  -->
+
+{% endblock content %}
+
+<!-- samples  -->
+{% block samples %}{% include "samples.html" %} {% endblock samples %}
+<!-- samples ends here -->
+
+ <!-- footer   -->
+ {% block footer %}  {% include "footer.html" %} {% endblock footer %}
+ <!-- footer done  -->

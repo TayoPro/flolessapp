@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% load humanize %}
+
+{% block title %}  Order Completed {% endblock title %}
+
+{% block keywords %} {{setting.keywords}} {% endblock keywords %}
+
+{% block description %} {{setting.description}} {% endblock description %}
+
+<!-- Header   -->
+{% block header %} {% include "pro-header.html" %} {% endblock header %}
+<!-- Header done  -->
+
+{% block content %}
+    
+  <!-- order completed Page  -->
+  <div class="callback-page" style="margin-top: 4rem;">
+    <div class="container">
+        <h2 class="title">Transaction Completed!</h2>
+    </div>
+</div>
+<!-- order completed Page Done  -->
+<!-- offer products  -->
+<div class="">
+<div class="small-container">
+    <div class="row">
+        <div class="col-2">
+            <img src="{{setting.icon.url}}" class="offer-img">
+        </div>
+        <div class="col-2">
+            <div class="callb" style="margin: 20px 0 40px;">
+                <h2 style="color: Black"> Dear 
+                    {% if user %}
+                        <span style="color: green;">{{user.userprofile.first_name}} </span>
+                    {% else %}
+                        <span style="color: green;"> Client </span>
+                    {% endif %},
+                <h5 style="color: green;font-size: large;"> <span style="color: green;"> your {{user.username|title}}</span> cart Order is Completed</h5>
+                <p style="color: green;">Your order will be shipped to you within 24hours.</p>
+                <p style="color: green;">Thank You for your patronage</p>
+            </div>
+            <!-- <p>Exclusively Aavailable at Floles Organics</p>
+            <h1>Exfoliating Scrub</h1>
+            <small>
+                Lorem ipsum dolor sit amet consectetur adipisicing 
+                elit. 
+            </small> -->
+            <a href="{% url 'products' %}" class="btn">Shop More &#8594;</a>
+        </div>
+    </div>
+</div>
+</div>
+<!-- offer products ends here -->
+
+{% endblock content %}
+
+<!-- samples  -->
+{% block samples %}{% include "samples.html" %} {% endblock samples %}
+<!-- samples ends here -->
+
+ <!-- footer   -->
+ {% block footer %}  {% include "footer.html" %} {% endblock footer %}
+ <!-- footer done  -->

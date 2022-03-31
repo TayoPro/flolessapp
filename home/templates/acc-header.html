@@ -1,0 +1,58 @@
+
+ <!-- <div class="headermain"> -->
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <a href="{% url 'index' %}"><img src="{{setting.logo.url}}" alt="company logo here"></a>
+            </div>
+            <div class="navbar">
+                <ul id="MenuItems">
+                    <li><a href="{% url 'index' %}">Home</a></li>  
+                    <li class="dropdown"><a href="">Category</a>    
+                        <ul class="dropdown-content">
+                            {% for item in category %}
+                                <li><a href="{% url 'product' item.id item.slug %}">{{item.title|title}}</a></li>  
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    <li><a href="{% url 'products' %}">Products</a></li>
+                    {% if user.id is not None %}                   
+                        <li style="color: #fff">                           
+                            <a href="{% url 'userprofile' %}">Welcome!
+                                {% if request.user.first_name %}
+                                    {{request.user.first_name}}
+                                {% else %}
+                                    {{request.user.username}}
+                                {% endif %}
+                            </a>
+                        </li>
+                        <li><a href="{% url 'logoutfunc' %}">Logout</a></li>
+                        <a href="{% url 'shopcart' %}"><img src="{{setting.cart_icon.url}}" alt="shop cart" width="30px" height="30px">
+                            <span class="badge">
+                                {% if itemcount > 0 %}
+                                    <span>{{ itemcount }}</span>
+                                {% else %}
+                                    <span>0</span>
+                                {% endif %} 
+                            </span>
+                        </a>
+                    {% else %}
+                        <li><a href="{% url 'about' %}">About</a></li>
+                        <li><a href="{% url 'contact' %}">Contact</a></li>
+                        <li><a href="{% url 'accountform' %}">Account</a></li>
+                    {% endif %}
+                </ul>   
+            </div>
+            <img src="{{setting.menu_icon.url}}" class="menu-icon" onclick="menutoggle()">
+        </div>
+    </div>
+<!-- </div> -->
+
+
+{% if messages %}
+    {% for message in messages  %}
+        <div class="alert" role="alert">
+            <p>{{ message }}</p>
+        </div>									  
+    {% endfor %}								  
+{% endif %}

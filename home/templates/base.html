@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>  
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="{% block description %} Organic Skincare{% endblock description %}">
+    <meta name="keywords" content="{% block keywords %} Natural Skincare {% endblock keywords %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static '' %}css/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Floles Organics |  {% block title %} Home  {% endblock title %}</title>
+    <link rel="icon" type="image/png" sizes="96x96" href="{{setting.icon.url}}">
+</head>
+<body>
+   
+    <!-- Header and banner combined  -->
+    {% block header %} {% endblock header %}
+    <!-- Header and banner done  -->
+
+    <!-- featured categories start here -->
+    {% block content %} {% endblock content %}
+    <!-- featured products and latest products  ends here-->
+
+    <!-- offer products  -->
+    {% block training %} {% endblock training %}
+    <!-- offer products ends here -->
+
+    <!-- samples  -->
+    {% block samples %} {% endblock samples %}
+    <!-- samples ends here -->
+
+
+    <!-- footer  -->
+    {% block footer %} {% endblock footer %}    
+    <!-- footer ends here  -->
+
+    <!-- js for togglemenu -->
+    <script src="{% static '' %}js/togglemenu.js"></script>
+    <!-- js for togglemenu done -->
+
+    <!-- js for product gallery  -->
+    <script src=" {% static '' %}js/gallery.js"></script>
+     <!-- js for product gallery done -->
+
+    <!-- js for form toggle  -->
+    <script src="{% static '' %}js/form.js"></script>
+    <!-- js for form toggle done  -->
+
+</body>
+
+</html>

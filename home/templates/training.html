@@ -1,0 +1,22 @@
+{% load humanize %}
+<div class="offer">
+    <div class="small-container">
+        <div class="row">
+            {% for item in training %}
+                <div class="col-2">
+                    <img src="{{item.image.url}}" class="offer-img">
+                </div>
+                <div class="col-2">
+                    <p>{{item.title|title}}</p>
+                    <h1>{{item.heading|title}}</h1>
+                    <p> Fee: # {{item.fee|floatformat:2|intcomma}}</p>
+                    <input type="hidden" name="training" value="{{item.fee}}">
+                    <small>{{item.detail|safe|slice:120}} ...</small>
+                    <a href="{% url 'training' %}" class="btn">Buy slot Now &#8594;</a> 
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+

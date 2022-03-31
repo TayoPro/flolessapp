@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+
+{% load humanize %}
+
+{% block title %} {{detail.title}} Shopcart {% endblock title %}
+
+{% block keywords %} {{detail.keywords}} {% endblock keywords %}
+
+{% block description %} {{detail.description}} {% endblock description %}
+
+<!-- Header   -->
+{% block header %} {% include "pro-header.html" %} {% endblock header %}
+<!-- Header done  -->
+
+{% block content %}
+    <!-- Cart items details  -->
+    <div class="small-container cart-page">
+        <table>
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Amount</th>
+            </tr>
+            {% if shopcart %} 
+                {% for item in shopcart %}
+                    <tr>
+                        <td>
+                            <div class="cart-info">
+                                <img src="{{item.product.image.url}}">
+                                <div>
+                                    <p>{{item.product.title}}</p>
+                                    <small>
+                                        {% if item.product.discount %}
+                                            <span>#{{item.product.discount | floatformat:2 | intcomma}}</span>
+                                        {% else %}
+                                            <span> #{{item.product.price | floatformat:2 | intcomma}}</span>
+                                        {% endif %}                                                     
+                                    </small>
+                                    <br>
+                                    <a href="{% url 'deletefromcart' item.id %}">Remove</a>
+                                    <form action="{% url 'updatequantity' %}" method="POST">
+                                    {% csrf_token %}
+                                        <input style="width: 70px; height:20px" type="number" id="item" name="itemquantity" value="{{item.quantity}}" min="{{item.product.minquantity}}" max="{{item.product.maxquantity}}">
+                                        <button type="submit" style="color:#ff523b;font-size: 12px;border:none; outline:none">Update Quantity</button>
+                                        <input type="hidden" name="itemid" value="{{ item.id }}">
+                                    </form>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            {% if item.product.discount %}
+                                <span>#{{item.product.discount | floatformat:2 | intcomma}}</span>
+                            {% else %}
+                                <span> #{{item.product.price | floatformat:2 | intcomma}}</span>
+                            {% endif %}
+                        </td>
+                        <td>{{item.quantity}}</td>
+                        <td>{{item.amount | floatformat:2 | intcomma}}</td>
+                    </tr>
+                {% endfor %} 
+            {% endif %}
+        </table>
+        <div class="total-price">
+            <table>
+                <tr>
+                    <td>Subtotal</td>
+                    <td>{{subtotal | floatformat:2 | intcomma}}</td>
+                </tr>
+                <tr>
+                    <td>Shipping Fee <span style="color: #ff523b; font-size: 12px;">(8% Order above #5,000)</td>
+                    <td>{{shipping | floatformat:2 | intcomma}}</td>
+                </tr>
+                <tr>
+                    <td>Vat <span style="color: #ff523b">(7.50%)</span></td>
+                    <td>{{vat | floatformat:2 | intcomma}}</td>
+                </tr>
+                <tr>
+                    <td>Total</td>
+                    <td>#{{total | floatformat:2 | intcomma}}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="total-price">
+            <table>
+                <tr>
+                    <td><a href="{% url 'products' %}" class="btn">Continue</a></td>
+                    <td>
+                        <!-- <a href="" class="btn">Checkout</a> -->
+                        <!-- <input type="button" value="Checkout" class="btn" onclick="return confirm('Sure?')"> -->
+                        <form action="{% url 'checkout' %}" method="POST">
+                        {% csrf_token %}
+                            <input type="hidden" name="get_cart" value="{{cartcode}}">
+                            <button type="submit"  class="btn">Checkout</button>
+                        </form>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <!-- cart items details end here  -->
+  
+{% endblock content %}
+
+<!-- samples  -->
+{% block samples %}{% include "samples.html" %} {% endblock samples %}
+<!-- samples ends here -->
+
+ <!-- footer   -->
+ {% block footer %}  {% include "footer.html" %} {% endblock footer %}
+ <!-- footer done  -->

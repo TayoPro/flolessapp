@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% load humanize %}
+
+{% block title %} Training Registration {% endblock title %}
+
+{% block keywords %} {{setting.keywords}} {% endblock keywords %}
+
+{% block description %} {{setting.description}} {% endblock description %}
+
+<!-- Header   -->
+{% block header %} {% include "acc-header.html" %} {% endblock header %}
+<!-- Header done  -->
+
+{% block content %}
+   
+  <!-- Train Page  -->
+  <div class="train-page">
+    <div class="container">
+        <h2 class="title">Register to get Trained by Floles Organics</h2>
+        <div class="row">
+            <div class="col-2">
+                <div class="form-container">
+                    <div class="form-btn">
+                        <span onclick="register()">Register</span>
+                    </div>
+                    <form id="RegForm" action="{% url 'training' %}" method="POST"> 
+                    {% csrf_token %}
+                        <p style="color: green; font-size:20px; text-align:left">Fee {% for item in fee %}
+                            <input type="hidden" name="amount" value="{{item.fee}}">
+                                {{item.fee|floatformat:2|intcomma}}
+                            {% endfor %} only.
+                        </p>
+                        <input type="text" placeholder="First Name" name="first_name">
+                        <input type="text" placeholder="Last Name" name="last_name">
+                        <input type="text" placeholder="Username" name="username">
+                        <input type="email" placeholder="Email" name="email">
+                        <input type="password" placeholder="Password" name="password1">
+                        <input type="password" placeholder="Repeat Password" name="password2">
+                        <input type="text" placeholder="Phone" name="phone">
+                        <input type="text" placeholder="Address" name="address">
+                        <input type="text" placeholder="city" name="city">
+                        <input type="text" placeholder="State" name="state">
+                        <input type="text" placeholder="Country" name="country">
+                        <button type="submit" class="btn">Register</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Training Page Done  -->
+
+{% endblock content %}
+
+<!-- samples  -->
+{% block samples %}{% include "samples.html" %} {% endblock samples %}
+<!-- samples ends here -->
+
+ <!-- footer   -->
+ {% block footer %}  {% include "footer.html" %} {% endblock footer %}
+ <!-- footer done  -->

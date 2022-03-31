@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% load humanize %}
+
+{% block title %} Contact Us {% endblock title %}
+
+{% block keywords %} {{setting.keywords}} {% endblock keywords %}
+
+{% block description %} {{setting.description}} {% endblock description %}
+
+<!-- Header   -->
+{% block header %} {% include "pro-header.html" %} {% endblock header %}
+<!-- Header done  -->
+
+{% block content %}
+   <!-- Contact Page  -->
+   <div class="contact-page">
+    <div class="container">
+        <h2 class="title">Contact Us</h2>
+        <div class="row">
+            <div class="col-2 padgit">
+                <div class="contact-details">
+                    <div class="cform-btn">
+                        <span>Love to Hear From You</span>
+                        <hr id="Indicate2">
+                    </div>
+                    <h4>{{setting.contact|safe}}</h4>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="form-contact">
+                    <div class="form-btn">
+                        <span>Get In Touch With Us</span>
+                        <hr id="Indicate">
+                    </div>
+                    <form class="form" action="{% url 'contact' %}" method="POST">
+                    {% csrf_token %}
+                        <input type="text" placeholder="Full Name" name="name">
+                        <input type="email" placeholder="Email" name="email">
+                        <input type="text" placeholder="Phone Number" name="phone">
+                        <input type="text" placeholder="Subject" name="subject">
+                        <textarea name="message" cols="30" rows="10"  placeholder="Your Message"></textarea>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Contact Page Done  -->
+ 
+ {% endblock content %}
+
+<!-- samples  -->
+{% block samples %}{% include "samples.html" %} {% endblock samples %}
+<!-- samples ends here -->
+
+ <!-- footer   -->
+ {% block footer %}  {% include "footer.html" %} {% endblock footer %}
+ <!-- footer done  -->

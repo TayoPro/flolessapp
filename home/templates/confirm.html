@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% load humanize %}
+
+{% block title %} {{profile.user.username}} Confirm Payment {% endblock title %}
+
+{% block keywords %} {{setting.keywords}} {% endblock keywords %}
+
+{% block description %} {{setting.description}} {% endblock description %}
+
+<!-- Header   -->
+{% block header %} {% include "pro-header.html" %} {% endblock header %}
+<!-- Header done  -->
+
+{% block content %}
+
+<!-- confirm payment  -->
+<div class="confirm-page">
+    <div class="container">
+        <div class="row">               
+            <div class="col-2">
+                <div class="form-container">
+                    <div class="confirm-btn">
+                        <span>Payment</span>
+                        <hr id="Indicate">
+                    </div>
+                    <form class="proform" method="POST" action="{% url 'payfee' %}">
+                    {% csrf_token %}
+                        {% for item in fee %}
+                            <p>Fee {{item.fee|floatformat:2|intcomma}}</p>
+                            <input type="hidden" name="amount" value="{{item.fee}}">
+                            <button type="submit"  class="btn">Confirm Payment</button>
+                        {% endfor %}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- confirm payment done -->
+
+{% endblock content %}
+
+<!-- samples  -->
+{% block samples %}{% include "samples.html" %} {% endblock samples %}
+<!-- samples ends here -->
+
+ <!-- footer   -->
+ {% block footer %}  {% include "footer.html" %} {% endblock footer %}
+ <!-- footer done  -->

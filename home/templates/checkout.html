@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% load humanize %}
+
+{% block title %} {{detail.title}} Checkout {% endblock title %}
+
+{% block keywords %} {{detail.keywords}} {% endblock keywords %}
+
+{% block description %} {{detail.description}} {% endblock description %}
+
+<!-- Header   -->
+{% block header %} {% include "pro-header.html" %} {% endblock header %}
+<!-- Header done  -->
+
+{% block content %}
+     <!-- Checkout Page  -->
+     <div class="checkout-page">
+        <div class="container">
+            <h2 class="title">Checkout Page</h2>
+            <div class="row">
+                <div class="col-2">
+                    <div class="cart-page">
+                        <table>
+                            <tr>
+                                <th>Product</th>
+                                <th>Price(#)</th>
+                                <th>Quantity</th>
+                                <th>Amount</th>
+                            </tr>
+                            {% if shopcart %} 
+                                {% for item in shopcart %}
+                                    <tr>
+                                        <td>
+                                            <div class="cart-info">
+                                                <div>
+                                                    <p style="color: #ff523b; font-size: 20px;">{{item.product.title}}</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>{{item.price}}</td>
+                                        <td>{{item.quantity}}</td>
+                                        <td>{{item.amount | floatformat:2 | intcomma}}</td>
+                                    </tr>
+                                {% endfor %} 
+                            {% endif %}
+                        </table>
+                        <div class="total-price">
+                            <table>
+                                <tr>
+                                    <td>Total</td>
+                                    <td>#{{total | floatformat:2 | intcomma}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="form-container">
+                        <div class="form-btn">
+                            <span>Shipping Details</span>
+                            <hr id="Indicator">
+                        </div>
+                        <form action="{% url 'placeorder' %}" method="POST">
+                        {% csrf_token %}
+                            <input type="text" value="{{profile.first_name}}" placeholder="First Name">
+                            <input type="text" value="{{profile.last_name}}" placeholder="Last Name">
+                            <input type="text" value="{{profile.phone}}" placeholder="Phone Number">
+                            <input type="text" value="{{profile.address}}" placeholder="Address">
+                            <input type="text" value="{{profile.city}}" placeholder="City">
+                            <input type="text" value="{{profile.state}}" placeholder="State">
+                            <input type="text" value="{{profile.country}}" placeholder="Country">
+                            <input type="hidden" name="amount" value="{{total}}">
+                            <input type="hidden" name="order_number" value="{{order_code}}">
+                            <button type="submit" class="btn">Proceed To Order</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   <!-- Checkout Page Done  -->
+    
+  
+{% endblock content %}
+
+<!-- samples  -->
+{% block samples %}{% include "samples.html" %} {% endblock samples %}
+<!-- samples ends here -->
+
+ <!-- footer   -->
+ {% block footer %}  {% include "footer.html" %} {% endblock footer %}
+ <!-- footer done  -->

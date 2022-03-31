@@ -1,0 +1,18 @@
+{% extends 'admin/base.html' %}
+
+{% load static %}
+
+
+{% block branding %}
+    <h1 id="head" style="color:#ff523b; font-weight:bolder">
+        <a href="{% url 'index' %}"><img style="width: 40px;" src="{% static 'img/logo.png' %}"></a>
+        Floles Organics 
+    </h1>
+{% endblock branding %}
+    
+
+{% block extrastyle %}
+<link href="{% static 'css/admin.css' %}" rel="stylesheet"> 
+<link rel="icon" type="image/png" sizes="96x96" href="{% static 'img/favicon-96x96.png' %}">
+{% endblock extrastyle %}
+    

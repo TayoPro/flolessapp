@@ -1,0 +1,13 @@
+<div class="testimonial">
+    <div class="small-container">
+        <div class="row">
+            {% for item in sample %}
+                <div class="col-3">
+                    <img src="{{item.image.url}}">
+                    <h3>{{item.title|title}}</h3>
+                </div>
+            {% endfor %}
+           
+        </div>
+    </div>
+</div>

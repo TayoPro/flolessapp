@@ -1,0 +1,78 @@
+ {% extends 'base.html' %}
+
+{% load humanize %}
+
+{% load static %}
+
+{% block title %} {{catdata.title}} Products {% endblock title %}
+
+{% block keywords %} {{catdata.keywords}} {% endblock keywords %}
+
+{% block description %} {{catdata.description}} {% endblock description %}
+
+<!-- Header   -->
+{% block header %} {% include "pro-header.html" %} {% endblock header %}
+<!-- Header done  -->
+
+ {% block content %}
+  <!-- All products  -->
+  <div class="small-container">
+    <div class="row row-2">
+        <h2>{{catdata.title}} Products</h2>
+    </div>
+    <div class="row">
+        {% for item in product  %}
+            <div class="col-4">
+                <a href="{% url 'detail' item.id item.slug %}"><img src="{{item.image.url}}"></a>
+                <a href="{% url 'detail' item.id item.slug %}"><h4>{{item.title|title}}</h4></a>
+                <div class="rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                </div>
+                <p>
+                    {% if item.discount %}
+                        <del>#{{item.price | floatformat:2 | intcomma}}</del>
+                        <span>#{{item.discount | floatformat:2 | intcomma}}</span>
+                    {% else %}
+                        <span> #{{item.price | floatformat:2 | intcomma}}</span>
+                    {% endif %}
+                </p>
+            </div>
+        {% endfor %}
+        <div class="pagination">
+            {% if product.has_previous %}
+                <a href="?page={{product.previous_page_number}}">&laquo;</a>
+            {% else %}
+                <a>&laquo;</a>
+            {% endif %}
+            {% for item in product.paginator.page_range %} 
+                {% if product.number == item %}
+                    <a>{{item}}</a>
+                {% else %}
+                    <a class="active" href="?page={{item}}">{{item}}</a>
+                {% endif %}
+            {% endfor %}
+            {% if product.has_next %}
+                <a href="?page={{product.next_page_number}}">&raquo;</a>
+            {% else %}
+                <a>&raquo;</a>
+            {% endif %}    
+        </div> 
+    </div>  
+</div>
+<!-- All products done  --> 
+
+
+ 
+ {% endblock content %}
+
+<!-- samples  -->
+{% block samples %}{% include "samples.html" %} {% endblock samples %}
+<!-- samples ends here -->
+
+ <!-- footer   -->
+ {% block footer %}  {% include "footer.html" %} {% endblock footer %}
+ <!-- footer done  -->

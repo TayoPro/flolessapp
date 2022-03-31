@@ -1,0 +1,93 @@
+#header{
+    height: 50px;
+    background-color: springgreen;
+    color: #ff523b;
+    font-weight: bolder;
+}
+#branding h1  #branding h1 a:link, #branding h1 a:visited{
+    color: #ff523b;
+    font-weight: bolder;
+}
+#head h1{
+    color: #ff523b;
+    font-weight: bolder;
+}
+h1{
+    color: #ff523b;
+    font-weight: bolder;
+}
+#user-tools{
+    color: #ff523b;
+    font-weight: bolder;
+}
+#user-tools a{
+    color: #ff523b;
+    font-weight: bolder;
+}
+#content h2{
+    color: springgreen;
+    font-size: 28px;
+    font-weight: bolder;
+}
+#addlink{
+    background-color: springgreen;
+    color: #ff523b;
+    font-weight: bolder;
+}
+#historylink{
+    background-color: springgreen;
+    color: #ff523b;
+    font-weight: bolder;
+}
+a:link,
+a:visited{
+    color: #ff523b;
+    font-weight: bolder;
+}
+#header a:link, #header a:visited {
+    color: #563434;
+    font-weight: bolder;
+}
+
+#header a:hover {
+    color: #563434;
+    font-weight: bolder;
+}
+div.breadcrumbs{
+    background: #ff523b;
+    color: white;
+    font-weight: bolder;
+}
+div.breadcrumbs a{
+    /* color: #ff523b; */
+    color: white;
+    font-weight: bolder;
+}
+.module h2, .module caption, .inline-group h2 {
+    background-color: springgreen;
+    color: #ff523b;
+    font-weight: bolder;
+}
+.button.default, input[type=submit].default, .submit-row input.default,input[type="submit"], button {
+    background-color: springgreen;
+    color: #ff523b;
+    font-weight: bolder;
+}
+    
+.select2-container--admin-autocomplete .select2-results__option--highlighted[aria-selected] {
+    background-color: springgreen;
+}
+table thead th.sorted .sortoptions a.sortremove:focus:after,
+table thead th.sorted .sortoptions a.sortremove:hover:after {
+    color: springgreen;
+}
+.app-auth caption .app-home caption {
+    background-color: springgreen;
+    color: #ff523b;
+    font-weight: bolder;
+}
+.caption {
+    background-color: springgreen;
+    color: #ff523b;
+    font-weight: bolder;
+}

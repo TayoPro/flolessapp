@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% load humanize %}
+
+{% load static %}
+
+{% block title %} {{detail.title}} Product {% endblock title %}
+
+{% block keywords %} {{detail.keywords}} {% endblock keywords %}
+
+{% block description %} {{detail.description}} {% endblock description %}
+
+<!-- Header   -->
+{% block header %} {% include "pro-header.html" %} {% endblock header %}
+<!-- Header done  -->
+
+{% block content %}
+
+  <!-- Single  detail details  -->
+
+  <div class="small-container single-detail">
+    <div class="row">
+        <div class="col-2">
+            <img src="{{detail.image.url}}" id="ProductImg">
+        </div>
+        <div class="col-2">
+            <p>Floles Organics</p>
+            <h1>{{detail.title|title}}</h1>
+            <h4>
+                {% if detail.discount %}
+                    <del>${{detail.price | floatformat:2 | intcomma}}</del>
+                    <span>${{ detail.discount| floatformat:2 | intcomma }}</span> 
+                {% else %}
+                    <span>${{ detail.price| floatformat:2 | intcomma }}</span>
+                {% endif %}
+            </h4>
+            <form action="{% url 'addtoshopcart' %}" method="POST">
+            {% csrf_token %}
+                <label>Qty:</label>
+                <input type="number" name="quantity" value="1" min="{{detail.minquantity}}" max="{{detail.quantity_instock}}" style="width: 50px;">
+                <input type="submit" class="btn" value="Add To Cart" style="width:150px">
+                <input type="hidden" name="prodid" value="{{detail.id}}">
+            </form>
+            <h3>{{detail.title|title}} Details <i class="fa fa-indent"></i></h3>
+            <br>
+            <p>{{detail.description}}</p>
+        </div>
+    </div>
+</div>
+<!-- title  -->
+<div class="small-container">
+    <div class="row row-2">
+        <h2>Other Products</h2>
+        <a href="{% url 'products' %}" class="btn">View More</a>
+    </div>
+</div>
+<!-- products  -->
+<div class="small-container">
+    <div class="row">
+        {% for item in product  %}
+            <div class="col-4">
+                <a href="{% url 'detail' item.id item.slug %}"><img src="{{item.image.url}}"></a>
+                <a href="{% url 'detail' item.id item.slug %}"><h4>{{item.title|title}}</h4></a>
+                <div class="rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                </div>
+                <p>
+                    {% if item.discount %}
+                        <del>#{{item.price | floatformat:2 | intcomma}}</del>
+                        <span>#{{item.discount | floatformat:2 | intcomma}}</span>
+                    {% else %}
+                        <span> #{{item.price | floatformat:2 | intcomma}}</span>
+                    {% endif %}
+                </p>
+            </div>
+        {% endfor %}       
+    </div>
+</div>
+<!-- product details end here  --> 
+
+{% endblock content %}
+
+<!-- samples  -->
+{% block samples %}{% include "samples.html" %} {% endblock samples %}
+<!-- samples ends here -->
+
+ <!-- footer   -->
+ {% block footer %}  {% include "footer.html" %} {% endblock footer %}
+ <!-- footer done  -->
